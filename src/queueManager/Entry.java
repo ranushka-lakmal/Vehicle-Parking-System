@@ -8,6 +8,8 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import carParkData.CarPark;
 import vehicle.Vehicle;
 
+import static Color.ConsoleColors.*;
+
 /**
  * @author sankalpa
  *
@@ -40,11 +42,11 @@ public class Entry implements Runnable {
                 // Check if a vehicle is currently in front of the queue
                 if (vehicleToEnter != null) {
                     this.carPark.addVehicle(vehicleToEnter);
-                    System.out.println(vehicleToEnter + " ENTERD PARK");
+                    System.out.println(ANSI_BLUE_BACKGROUND+vehicleToEnter + " Successfully added to the park"+ANSI_RESET);
                 }
             } catch (Exception e) {
-                // car park full, then display PARK FULL Message
-                System.out.println("PARK FULL " + vehicleToEnter + " THIS MOMENT");
+                // car park full -> then displayed error message as sorry park is full....
+                System.out.println(ANSI_BLACK_BACKGROUND+"Sorry Park is full " + vehicleToEnter + "Can't added this time" + ANSI_RESET);
             }
             try {
                 // Thread.sleep giving others threads to run

@@ -28,9 +28,9 @@ public class Exit implements Runnable {
     private CarPark carPark;
 
     public Exit(String name, int sleep, ConcurrentLinkedDeque queue, CarPark carPark) {
-        this.queue = queue;
-        this.SLEEP = sleep;
         this.name = name;
+        this.queue = queue; //ConcurrentLinkedDeque
+        this.SLEEP = sleep;
         this.carPark = carPark;
     }
 
@@ -41,21 +41,20 @@ public class Exit implements Runnable {
 
     @Override
     public void run() {
-        // Simulate random vehicles leaving this car park periodically
+        // Random vehicle exit from car park periodically
         while (true) {
             List<Vehicle> vehicleList = new ArrayList<>(this.carPark.getVehicleList());
             Collections.shuffle(vehicleList);
             if (vehicleList.size() != 0) {
-                // Get a random vehicle that will be removed
+                // Random vehicle that will be removed
                 Vehicle vehicleToRemove = vehicleList.get(0);
                 try {
                     // Remove the vehicle from teh car park
                     this.carPark.deleteVehicle(vehicleToRemove.getPlateId());
                     System.out.println(vehicleToRemove +  " Exit From Car Park");
                 } catch (Exception e) {
-                    /*System.out.println(ANSI_GREEN_BACKGROUND);*/
 
-                    System.out.println(vehicleToRemove.getPlateId() + ANSI_RED_BACKGROUND+" Already Exit From Car P ark"+ANSI_RESET);
+                    System.out.println(ANSI_RED_BACKGROUND+vehicleToRemove.getPlateId() +" Already Exit From Car P ark"+ANSI_RESET);
                 }
             }
             try {
